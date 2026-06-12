@@ -1,17 +1,19 @@
 {
   "name": "MyFootCV — Global Football CV Platform",
   "short_name": "MyFootCV",
-  "description": "Crée ton CV football professionnel en 2 minutes. Joueurs & Staff. PDF + DNA Card + QR vidéo.",
+  "description": "Crée ton CV football professionnel en 2 minutes. Joueurs & Staff. PDF + DNA Card + QR vidéo. Compatible mobile, tablette et desktop.",
   "lang": "fr",
   "dir": "ltr",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
-  "orientation": "portrait-primary",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
+  "orientation": "any",
   "theme_color": "#1A3B7A",
   "background_color": "#0a0e1a",
   "categories": ["sports", "social", "productivity", "lifestyle"],
   "id": "/?source=pwa",
+  "iarc_rating_id": "",
   "icons": [
     {
       "src": "icon-192.png",
@@ -22,6 +24,12 @@
     {
       "src": "icon-512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-1024.png",
+      "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any"
     },
@@ -46,7 +54,7 @@
   ],
   "shortcuts": [
     {
-      "name": "Créer mon CV",
+      "name": "Créer mon CV joueur",
       "short_name": "Nouveau CV",
       "description": "Démarrer un nouveau CV joueur",
       "url": "/?type=player&source=shortcut",
@@ -55,7 +63,7 @@
     {
       "name": "Je suis Staff",
       "short_name": "Staff",
-      "description": "CV pour coach, scout, manager...",
+      "description": "CV pour coach, scout, manager, médecin...",
       "url": "/?type=staff&source=shortcut",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     },
@@ -65,19 +73,44 @@
       "description": "Voir ou modifier mon profil",
       "url": "/?source=shortcut&action=profile",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Dashboard Admin",
+      "short_name": "Admin",
+      "description": "Dashboard Super-Admin (réservé)",
+      "url": "/admin.html?source=shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
     {
-      "src": "logo.png",
-      "sizes": "600x400",
+      "src": "screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MyFootCV sur iPhone"
+    },
+    {
+      "src": "screenshot-tablet-portrait.png",
+      "sizes": "800x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MyFootCV sur tablette portrait"
+    },
+    {
+      "src": "screenshot-tablet-landscape.png",
+      "sizes": "1280x800",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "MyFootCV — Plateforme CV professionnel"
+      "label": "MyFootCV sur tablette paysage / desktop"
     }
   ],
   "prefer_related_applications": false,
   "edge_side_panel": {
     "preferred_width": 480
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
   }
 }

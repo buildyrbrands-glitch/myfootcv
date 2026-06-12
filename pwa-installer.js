@@ -22,11 +22,18 @@
   let installBtn = null;
   let iosBanner = null;
 
-  // 3. Détection plateforme
+  // 3. Détection plateforme (incluant iPad récent qui se déclare comme Mac)
   const ua = navigator.userAgent.toLowerCase();
-  const isIOS = /iphone|ipad|ipod/.test(ua) && !window.MSStream;
+  const isIPhone = /iphone|ipod/.test(ua) && !window.MSStream;
+  const isIPadOld = /ipad/.test(ua) && !window.MSStream;
+  // iPad récent (iOS 13+) se déclare comme MacIntel mais a touch
+  const isIPadModern = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+  const isIPad = isIPadOld || isIPadModern;
+  const isIOS = isIPhone || isIPad;
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
   const isAndroid = /android/.test(ua);
+  const isAndroidTablet = isAndroid && !/mobile/.test(ua);
+  const isTablet = isIPad || isAndroidTablet;
   const isDesktop = !isIOS && !isAndroid;
 
   // 4. Si déjà installé, ne rien faire
@@ -144,9 +151,10 @@
     setTimeout(() => {
       iosBanner = document.createElement("div");
       iosBanner.className = "pwa-ios-banner";
+      const deviceLbl = isIPad ? "iPad" : "iPhone";
       iosBanner.innerHTML = `
         <button class="close" aria-label="Fermer">×</button>
-        <h4>📱 Installer MyFootCV sur iPhone</h4>
+        <h4>📱 Installer MyFootCV sur ${deviceLbl}</h4>
         <p>Touche <span class="step">⤴ Partager</span> puis <span class="step">Sur l'écran d'accueil</span> pour l'ajouter comme une app.</p>
       `;
       iosBanner.querySelector(".close").onclick = () => {
@@ -169,16 +177,25 @@
   // 11. Exposer une fonction globale pour déclencher manuellement
   window.installApp = () => {
     if (deferredPrompt) { doInstall(); return; }
-    if (isIOS) {
-      alert("📱 Pour installer MyFootCV sur iPhone :\n\n1. Touche le bouton Partager ⤴️\n2. Choisis 'Sur l'écran d'accueil'\n3. Confirme avec 'Ajouter'");
+    if (isIPad) {
+      alert("📱 Installer MyFootCV sur iPad :\n\n1. Ouvre Safari (pas Chrome) sur cette page\n2. Touche le bouton Partager ⤴️ (en haut)\n3. Choisis 'Sur l'écran d'accueil'\n4. Confirme avec 'Ajouter'\n\n💡 L'app s'ouvrira en plein écran comme une vraie application !");
+      return;
+    }
+    if (isIPhone) {
+      alert("📱 Installer MyFootCV sur iPhone :\n\n1. Ouvre Safari (pas Chrome) sur cette page\n2. Touche le bouton Partager ⤴️\n3. Choisis 'Sur l'écran d'accueil'\n4. Confirme avec 'Ajouter'");
+      return;
+    }
+    if (isAndroidTablet) {
+      alert("📱 Installer MyFootCV sur tablette Android :\n\n1. Ouvre le menu Chrome (⋮ en haut à droite)\n2. Touche 'Installer l'app'\n3. Confirme\n\n💡 Fonctionne aussi sur Samsung Internet, Brave, Edge.");
       return;
     }
     if (isAndroid) {
-      alert("📱 Pour installer MyFootCV sur Android :\n\n1. Ouvre le menu Chrome (⋮)\n2. Touche 'Installer l'app' ou 'Ajouter à l'écran d'accueil'");
+      alert("📱 Installer MyFootCV sur Android :\n\n1. Ouvre le menu Chrome (⋮)\n2. Touche 'Installer l'app' ou 'Ajouter à l'écran d'accueil'");
       return;
     }
-    alert("💻 Pour installer MyFootCV :\n\n1. Clique sur l'icône d'installation dans la barre d'adresse\n2. Ou utilise le menu du navigateur");
+    alert("💻 Installer MyFootCV sur ordinateur :\n\n1. Clique sur l'icône d'installation ⊕ dans la barre d'adresse\n2. Ou ouvre le menu du navigateur → 'Installer MyFootCV'\n\n✅ Fonctionne sur Chrome, Edge, Brave, Arc, Opera.");
   };
 
-  console.log("✅ PWA installer loaded — platform:", isIOS ? "iOS" : isAndroid ? "Android" : "Desktop");
+  const platform = isIPad ? "iPad" : isIPhone ? "iPhone" : isAndroidTablet ? "Android tablet" : isAndroid ? "Android phone" : "Desktop";
+  console.log("✅ PWA installer loaded — platform:", platform);
 })();
