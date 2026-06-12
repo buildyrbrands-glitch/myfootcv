@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" href="favicon.png"/>
 <link rel="apple-touch-icon" href="favicon.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<script type="module" src="supabase-client.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Source Sans 3',sans-serif;background:#f0f3f8;color:#0B1B3F;min-height:100vh}
@@ -2668,6 +2669,18 @@ function handleSave(){
   activeCV="pdf";setActiveCV("pdf");
   showScr("profile");
   updateReferralDisplay();
+  // ─── Sauvegarde Supabase (BDD) si utilisateur connecté ───
+  if(window.MyFootCV&&window.MyFootCV.saveCv){
+    window.MyFootCV.getCurrentUser().then(user=>{
+      if(user&&user.profile){
+        window.MyFootCV.saveCv(savedCV,type).then(r=>{
+          if(r.ok){showToastMsg("☁️ CV synchronisé en cloud");window.MyFootCV.logEvent("CV_SAVED",{slug:r.cv.slug,type:type});}
+        });
+      }else{
+        showToastMsg("💡 Connecte-toi pour sauvegarder en cloud (admin.html)");
+      }
+    }).catch(()=>{});
+  }
   // Toast confirmation
   showToastMsg("✅ CV mis à jour avec succès");
 }
