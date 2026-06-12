@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MyFootCV Admin — Super Admin Dashboard</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:#0a0e1a;color:#e5e7eb;min-height:100vh}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.gate{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.gate-box{background:#1f2937;border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:32px;max-width:420px;width:100%;text-align:center}
+.gate-logo{width:60px;height:auto;margin:0 auto 16px;display:block}
+.gate h1{font-family:'Oswald',sans-serif;font-size:24px;letter-spacing:2px;margin-bottom:6px;text-transform:uppercase}
+.gate p{font-size:13px;color:#9ca3af;margin-bottom:20px}
+.gate input{width:100%;padding:12px;background:#111827;border:1px solid #374151;border-radius:8px;color:white;font-size:14px;margin-bottom:10px}
+.gate input:focus{border-color:#3b82f6;outline:none}
+.gate button{width:100%;padding:12px;background:#3b82f6;border:none;border-radius:8px;color:white;font-weight:700;font-family:'Oswald',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-size:13px}
+.gate button:hover{background:#2563eb}
+.gate-err{color:#f87171;font-size:12px;margin-top:8px;min-height:16px}
+
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.sidebar{background:#111827;border-right:1px solid rgba(255,255,255,0.08);padding:20px 0}
+.sidebar-logo{padding:0 20px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:14px}
+.sidebar-logo img{height:36px;width:auto}
+.sidebar-logo-txt{font-family:'Oswald',sans-serif;font-size:11px;color:#fbbf24;letter-spacing:2px;text-transform:uppercase}
+.nav-item{padding:11px 20px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13.5px;color:#9ca3af;border-left:3px solid transparent;transition:all 0.15s}
+.nav-item:hover{background:rgba(255,255,255,0.03);color:white}
+.nav-item.active{background:rgba(59,130,246,0.1);color:#60a5fa;border-left-color:#3b82f6}
+.nav-item .ico{font-size:16px}
+.nav-section{font-family:'Oswald',sans-serif;font-size:10px;color:#4b5563;text-transform:uppercase;letter-spacing:2px;padding:14px 20px 6px}
+
+.main{padding:24px 32px;overflow-y:auto;max-height:100vh}
+.page-h{font-family:'Oswald',sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+.page-sub{font-size:13px;color:#9ca3af;margin-bottom:24px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+.kpi{background:#1f2937;border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px}
+.kpi-lbl{font-family:'Oswald',sans-serif;font-size:10px;color:#9ca3af;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.kpi-val{font-size:26px;font-weight:700;font-family:'Oswald',sans-serif;color:white;line-height:1.1}
+.kpi-sub{font-size:11px;color:#6b7280;margin-top:4px}
+.kpi.green .kpi-val{color:#34d399}
+.kpi.yellow .kpi-val{color:#fbbf24}
+.kpi.red .kpi-val{color:#f87171}
+
+.card{background:#1f2937;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px;margin-bottom:18px}
+.card-h{font-family:'Oswald',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;color:#fbbf24;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.card-h .btn{padding:6px 14px;background:#3b82f6;border:none;border-radius:6px;color:white;font-size:11px;font-family:'Oswald',sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:700}
+.card-h .btn:hover{background:#2563eb}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-family:'Oswald',sans-serif;font-size:10px;color:#9ca3af;letter-spacing:1.5px;text-transform:uppercase;text-align:left;padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.06)}
+td{padding:11px 8px;border-bottom:1px solid rgba(255,255,255,0.04);color:#d1d5db}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.badge{display:inline-block;padding:3px 10px;border-radius:14px;font-size:10.5px;font-weight:700;font-family:'Oswald',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.badge.green{background:rgba(52,211,153,0.15);color:#34d399}
+.badge.yellow{background:rgba(251,191,36,0.15);color:#fbbf24}
+.badge.red{background:rgba(248,113,113,0.15);color:#f87171}
+.badge.blue{background:rgba(96,165,250,0.15);color:#60a5fa}
+
+.empty{padding:30px;text-align:center;color:#6b7280;font-size:13px}
+.loading{padding:20px;text-align:center;color:#9ca3af}
+
+.toolbar{display:flex;gap:8px;margin-bottom:14px}
+.toolbar input{flex:1;padding:8px 12px;background:#111827;border:1px solid #374151;border-radius:6px;color:white;font-size:13px}
+.toolbar select{padding:8px 12px;background:#111827;border:1px solid #374151;border-radius:6px;color:white;font-size:13px}
+
+.page{display:none}
+.page.active{display:block}
+
+.signout{position:absolute;bottom:20px;left:20px;right:20px;padding:9px;background:#1f2937;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#9ca3af;font-size:12px;cursor:pointer;text-align:center}
+.signout:hover{background:rgba(248,113,113,0.1);color:#f87171}
+</style>
+</head>
+<body>
+
+<!-- ─── Login Gate ─────────────────────────────────────── -->
+<div id="gate" class="gate">
+  <div class="gate-box">
+    <img src="logo.png" alt="MyFootCV" class="gate-logo"/>
+    <h1>Admin Dashboard</h1>
+    <p>Connecte-toi avec ton compte super-admin</p>
+    <input type="email" id="g-email" placeholder="Email" autocomplete="email"/>
+    <input type="password" id="g-pwd" placeholder="Mot de passe" autocomplete="current-password"/>
+    <button onclick="doLogin()">Se connecter</button>
+    <div class="gate-err" id="g-err"></div>
+    <p style="margin-top:18px;font-size:11px"><a href="index.html">← Retour au site</a></p>
+  </div>
+</div>
+
+<!-- ─── Dashboard ─────────────────────────────────────── -->
+<div id="dash" class="layout" style="display:none">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <img src="logo.png" alt="MyFootCV"/>
+      <div class="sidebar-logo-txt">Super Admin</div>
+    </div>
+
+    <div class="nav-section">Vue d'ensemble</div>
+    <div class="nav-item active" data-page="overview"><span class="ico">📊</span>Statistiques</div>
+
+    <div class="nav-section">Données</div>
+    <div class="nav-item" data-page="users"><span class="ico">👥</span>Utilisateurs</div>
+    <div class="nav-item" data-page="cvs"><span class="ico">📋</span>CVs</div>
+
+    <div class="nav-section">Finances</div>
+    <div class="nav-item" data-page="payments"><span class="ico">💳</span>Paiements</div>
+    <div class="nav-item" data-page="payouts"><span class="ico">💸</span>Payouts parrains</div>
+    <div class="nav-item" data-page="promo"><span class="ico">🎟️</span>Codes promo</div>
+
+    <div class="nav-section">Modération</div>
+    <div class="nav-item" data-page="flags"><span class="ico">🚨</span>CV signalés</div>
+    <div class="nav-item" data-page="audit"><span class="ico">📜</span>Audit log</div>
+
+    <div class="nav-section">Système</div>
+    <div class="nav-item" data-page="settings"><span class="ico">⚙️</span>Configuration</div>
+
+    <div class="signout" onclick="doLogout()">🚪 Déconnexion</div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div class="page active" id="p-overview">
+      <h1 class="page-h">Tableau de bord</h1>
+      <p class="page-sub" id="welcome-msg">Bienvenue dans le dashboard Super-Admin.</p>
+
+      <div class="kpi-grid" id="kpi-grid">
+        <div class="loading">Chargement des stats...</div>
+      </div>
+
+      <div class="card">
+        <div class="card-h">📈 Activité récente</div>
+        <div id="recent-activity"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="page" id="p-users">
+      <h1 class="page-h">Utilisateurs</h1>
+      <p class="page-sub">Tous les comptes inscrits sur MyFootCV.</p>
+      <div class="card">
+        <div class="toolbar">
+          <input type="text" placeholder="🔍 Rechercher par email..." id="user-search"/>
+          <select id="user-role-filter">
+            <option value="">Tous les rôles</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+            <option value="super_admin">Super Admin</option>
+          </select>
+        </div>
+        <div id="users-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- CVS -->
+    <div class="page" id="p-cvs">
+      <h1 class="page-h">CVs</h1>
+      <p class="page-sub">Tous les CV créés (joueurs et staff).</p>
+      <div class="card">
+        <div id="cvs-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- PAYMENTS -->
+    <div class="page" id="p-payments">
+      <h1 class="page-h">Paiements</h1>
+      <p class="page-sub">Historique de toutes les transactions Stripe.</p>
+      <div class="card">
+        <div id="payments-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- PAYOUTS -->
+    <div class="page" id="p-payouts">
+      <h1 class="page-h">Payouts Parrains</h1>
+      <p class="page-sub">Commissions 15% à verser aux parrains.</p>
+      <div class="card">
+        <div id="payouts-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- PROMO -->
+    <div class="page" id="p-promo">
+      <h1 class="page-h">Codes promo</h1>
+      <p class="page-sub">Crée et gère les codes de réduction.</p>
+      <div class="card">
+        <div class="card-h">
+          <span>Créer un nouveau code</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 120px 120px 160px;gap:10px;margin-bottom:14px">
+          <input type="text" id="promo-code" placeholder="Code (ex: WELCOME50)" style="padding:8px;background:#111827;border:1px solid #374151;border-radius:6px;color:white;font-size:13px;text-transform:uppercase"/>
+          <input type="number" id="promo-discount" placeholder="% off" min="1" max="100" value="20" style="padding:8px;background:#111827;border:1px solid #374151;border-radius:6px;color:white;font-size:13px"/>
+          <input type="number" id="promo-max" placeholder="Max uses" min="1" style="padding:8px;background:#111827;border:1px solid #374151;border-radius:6px;color:white;font-size:13px"/>
+          <button onclick="createPromoCode()" style="padding:8px;background:#3b82f6;border:none;border-radius:6px;color:white;font-weight:700;cursor:pointer">Créer le code</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h">Codes existants</div>
+        <div id="promo-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- FLAGS -->
+    <div class="page" id="p-flags">
+      <h1 class="page-h">CVs signalés</h1>
+      <p class="page-sub">CV reportés par des utilisateurs pour modération.</p>
+      <div class="card">
+        <div id="flags-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- AUDIT -->
+    <div class="page" id="p-audit">
+      <h1 class="page-h">Audit log</h1>
+      <p class="page-sub">Toutes les actions sensibles tracées (100 dernières).</p>
+      <div class="card">
+        <div id="audit-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="page" id="p-settings">
+      <h1 class="page-h">Configuration</h1>
+      <p class="page-sub">Paramètres globaux de l'application.</p>
+      <div class="card">
+        <div class="card-h">Paramètres</div>
+        <div id="settings-table"><div class="loading">Chargement...</div></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script type="module" src="supabase-client.js"></script>
+<script type="module">
+const wait = (ms) => new Promise(r => setTimeout(r, ms));
+await wait(300); // attendre que supabase-client.js se charge
+const MFC = window.MyFootCV;
+
+const fmt = (cents) => "$" + ((cents || 0) / 100).toFixed(2);
+const fmtDate = (iso) => new Date(iso).toLocaleString("fr-FR", {dateStyle: "short", timeStyle: "short"});
+const safe = (s) => String(s || "").replace(/[<>&"]/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
+
+window.doLogin = async () => {
+  const email = document.getElementById("g-email").value.trim();
+  const pwd = document.getElementById("g-pwd").value;
+  const err = document.getElementById("g-err");
+  err.textContent = "";
+
+  if (!email || !pwd) { err.textContent = "Email et mot de passe requis"; return; }
+
+  const r = await MFC.signIn(email, pwd);
+  if (!r.ok) { err.textContent = r.error; return; }
+
+  const user = await MFC.getCurrentUser();
+  if (!user || !user.profile) { err.textContent = "Profil introuvable"; return; }
+  if (user.profile.role !== "super_admin" && user.profile.role !== "admin") {
+    err.textContent = "Accès refusé : compte non admin";
+    await MFC.signOut();
+    return;
+  }
+
+  document.getElementById("welcome-msg").textContent = "Connecté en tant que " + user.profile.display_name + " (" + user.profile.role + ")";
+  showDash();
+};
+
+window.doLogout = async () => {
+  await MFC.signOut();
+  location.reload();
+};
+
+const showDash = () => {
+  document.getElementById("gate").style.display = "none";
+  document.getElementById("dash").style.display = "grid";
+  loadOverview();
+};
+
+// Nav
+document.querySelectorAll(".nav-item").forEach(item => {
+  item.addEventListener("click", () => {
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+    item.classList.add("active");
+    const page = item.dataset.page;
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById("p-" + page).classList.add("active");
+    loaders[page] && loaders[page]();
+  });
+});
+
+const loaders = {
+  overview: loadOverview,
+  users: loadUsers,
+  cvs: loadCvs,
+  payments: loadPayments,
+  payouts: loadPayouts,
+  promo: loadPromoCodes,
+  flags: loadFlags,
+  audit: loadAudit,
+  settings: loadSettings
+};
+
+async function loadOverview() {
+  const r = await MFC.admin.getStats();
+  const grid = document.getElementById("kpi-grid");
+  if (!r.ok) { grid.innerHTML = "<div class='empty'>Erreur: " + r.error + "</div>"; return; }
+  const s = r.stats;
+  grid.innerHTML = `
+    <div class="kpi"><div class="kpi-lbl">Utilisateurs</div><div class="kpi-val">${s.total_users}</div><div class="kpi-sub">+${s.new_users_week} cette semaine</div></div>
+    <div class="kpi"><div class="kpi-lbl">CV créés</div><div class="kpi-val">${s.total_cvs}</div><div class="kpi-sub">+${s.new_cvs_week} cette semaine</div></div>
+    <div class="kpi"><div class="kpi-lbl">Joueurs / Staff</div><div class="kpi-val">${s.total_players} / ${s.total_staff}</div><div class="kpi-sub">Répartition</div></div>
+    <div class="kpi green"><div class="kpi-lbl">Revenus totaux</div><div class="kpi-val">${fmt(s.total_revenue_cents)}</div><div class="kpi-sub">${fmt(s.monthly_revenue_cents)} ce mois</div></div>
+    <div class="kpi yellow"><div class="kpi-lbl">Payouts dûs</div><div class="kpi-val">${fmt(s.pending_payouts_cents)}</div><div class="kpi-sub">Commissions parrains</div></div>
+    <div class="kpi ${s.pending_flags > 0 ? 'red' : ''}"><div class="kpi-lbl">CV signalés</div><div class="kpi-val">${s.pending_flags}</div><div class="kpi-sub">À modérer</div></div>
+  `;
+  // Activité récente = audit log dernières 10
+  const a = await MFC.admin.listAuditLog(10);
+  const act = document.getElementById("recent-activity");
+  if (!a.ok || a.logs.length === 0) { act.innerHTML = "<div class='empty'>Aucune activité récente</div>"; return; }
+  act.innerHTML = "<table><thead><tr><th>Quand</th><th>Qui</th><th>Action</th></tr></thead><tbody>" +
+    a.logs.map(l => `<tr><td style="color:#9ca3af">${fmtDate(l.created_at)}</td><td>${safe(l.profiles?.email || "-")}</td><td><span class="badge blue">${safe(l.event_type)}</span></td></tr>`).join("") +
+    "</tbody></table>";
+}
+
+async function loadUsers() {
+  const r = await MFC.admin.listUsers(100);
+  const div = document.getElementById("users-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.users.length === 0) { div.innerHTML = "<div class='empty'>Aucun utilisateur</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Email</th><th>Nom</th><th>Rôle</th><th>Code parrain</th><th>Gains</th><th>Inscrit</th></tr></thead><tbody>" +
+    r.users.map(u => `<tr>
+      <td>${safe(u.email)}</td>
+      <td>${safe(u.display_name)}</td>
+      <td><span class="badge ${u.role === 'super_admin' ? 'red' : u.role === 'admin' ? 'yellow' : 'blue'}">${u.role}</span></td>
+      <td><code style="font-size:11px">${safe(u.referral_code)}</code></td>
+      <td>${fmt(u.total_earnings_cents)}</td>
+      <td style="color:#9ca3af">${fmtDate(u.created_at)}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+async function loadCvs() {
+  const r = await MFC.admin.listCvs(100);
+  const div = document.getElementById("cvs-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.cvs.length === 0) { div.innerHTML = "<div class='empty'>Aucun CV créé pour l'instant</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Slug</th><th>Type</th><th>Email</th><th>Publié</th><th>Vues</th><th>Créé</th></tr></thead><tbody>" +
+    r.cvs.map(c => `<tr>
+      <td><a href="/${safe(c.slug)}" target="_blank">${safe(c.slug)}</a></td>
+      <td><span class="badge ${c.type === 'player' ? 'green' : 'yellow'}">${c.type}</span></td>
+      <td>${safe(c.profiles?.email || "-")}</td>
+      <td>${c.is_published ? '<span class="badge green">Public</span>' : '<span class="badge">Brouillon</span>'}</td>
+      <td>${c.view_count}</td>
+      <td style="color:#9ca3af">${fmtDate(c.created_at)}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+async function loadPayments() {
+  const r = await MFC.admin.listPayments(100);
+  const div = document.getElementById("payments-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.payments.length === 0) { div.innerHTML = "<div class='empty'>Aucun paiement pour l'instant</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Date</th><th>Email</th><th>Type</th><th>Montant</th><th>Status</th><th>Promo</th></tr></thead><tbody>" +
+    r.payments.map(p => `<tr>
+      <td style="color:#9ca3af">${fmtDate(p.created_at)}</td>
+      <td>${safe(p.profiles?.email || "-")}</td>
+      <td><span class="badge blue">${p.type}</span></td>
+      <td><strong>${fmt(p.amount_cents - (p.discount_cents || 0))}</strong></td>
+      <td><span class="badge ${p.status === 'succeeded' ? 'green' : p.status === 'failed' ? 'red' : 'yellow'}">${p.status}</span></td>
+      <td>${safe(p.promo_code || "-")}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+async function loadPayouts() {
+  const r = await MFC.admin.listPendingPayouts();
+  const div = document.getElementById("payouts-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.payouts.length === 0) { div.innerHTML = "<div class='empty'>Aucun payout en attente 🎉</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Parrain</th><th>Commission</th><th>Status</th><th>Date</th></tr></thead><tbody>" +
+    r.payouts.map(p => `<tr>
+      <td>${safe(p.profiles?.email || "-")} (${safe(p.profiles?.display_name)})</td>
+      <td><strong>${fmt(p.commission_cents)}</strong></td>
+      <td><span class="badge yellow">À payer</span></td>
+      <td style="color:#9ca3af">${fmtDate(p.created_at)}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+async function loadPromoCodes() {
+  const r = await MFC.admin.listPromoCodes();
+  const div = document.getElementById("promo-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.codes.length === 0) { div.innerHTML = "<div class='empty'>Aucun code promo. Crée-en un ci-dessus.</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Code</th><th>Réduction</th><th>Utilisations</th><th>Status</th><th>Créé</th></tr></thead><tbody>" +
+    r.codes.map(c => `<tr>
+      <td><code style="background:rgba(96,165,250,0.1);padding:3px 8px;border-radius:4px;color:#60a5fa">${safe(c.code)}</code></td>
+      <td><strong>${c.discount_percent}%</strong></td>
+      <td>${c.current_uses}${c.max_uses ? ' / ' + c.max_uses : ' / ∞'}</td>
+      <td><span class="badge ${c.is_active ? 'green' : 'red'}">${c.is_active ? 'Actif' : 'Désactivé'}</span></td>
+      <td style="color:#9ca3af">${fmtDate(c.created_at)}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+window.createPromoCode = async () => {
+  const code = document.getElementById("promo-code").value.trim();
+  const discount = parseInt(document.getElementById("promo-discount").value);
+  const max = parseInt(document.getElementById("promo-max").value) || null;
+  if (!code || !discount) { alert("Code + % discount requis"); return; }
+  const r = await MFC.admin.createPromoCode(code, discount, max);
+  if (!r.ok) { alert("Erreur : " + r.error); return; }
+  document.getElementById("promo-code").value = "";
+  loadPromoCodes();
+};
+
+async function loadFlags() {
+  const r = await MFC.admin.listFlaggedCvs();
+  const div = document.getElementById("flags-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.flags.length === 0) { div.innerHTML = "<div class='empty'>Aucun CV signalé 🎉</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>CV</th><th>Reporter</th><th>Raison</th><th>Détails</th><th>Date</th></tr></thead><tbody>" +
+    r.flags.map(f => `<tr>
+      <td><a href="/${safe(f.cvs?.slug)}" target="_blank">${safe(f.cvs?.slug || "-")}</a></td>
+      <td>${safe(f.profiles?.email || "anonyme")}</td>
+      <td><span class="badge red">${safe(f.reason)}</span></td>
+      <td style="font-size:12px;color:#9ca3af">${safe(f.details || "-")}</td>
+      <td style="color:#9ca3af">${fmtDate(f.created_at)}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+async function loadAudit() {
+  const r = await MFC.admin.listAuditLog(100);
+  const div = document.getElementById("audit-table");
+  if (!r.ok) { div.innerHTML = "<div class='empty'>" + r.error + "</div>"; return; }
+  if (r.logs.length === 0) { div.innerHTML = "<div class='empty'>Aucun événement audité encore</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Quand</th><th>Qui</th><th>Action</th><th>Données</th></tr></thead><tbody>" +
+    r.logs.map(l => `<tr>
+      <td style="color:#9ca3af;font-size:11.5px">${fmtDate(l.created_at)}</td>
+      <td>${safe(l.profiles?.email || "-")}</td>
+      <td><span class="badge blue">${safe(l.event_type)}</span></td>
+      <td style="font-size:11px;color:#9ca3af;font-family:monospace">${safe(JSON.stringify(l.event_data || {}).slice(0, 100))}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+async function loadSettings() {
+  const { data, error } = await MFC.supabase.from("app_settings").select("*");
+  const div = document.getElementById("settings-table");
+  if (error) { div.innerHTML = "<div class='empty'>" + error.message + "</div>"; return; }
+  div.innerHTML = "<table><thead><tr><th>Clé</th><th>Valeur</th><th>Description</th></tr></thead><tbody>" +
+    data.map(s => `<tr>
+      <td><code>${safe(s.key)}</code></td>
+      <td><strong>${safe(JSON.stringify(s.value))}</strong></td>
+      <td style="color:#9ca3af">${safe(s.description)}</td>
+    </tr>`).join("") + "</tbody></table>";
+}
+
+// Vérifier si l'user est déjà connecté
+const u = await MFC.getCurrentUser();
+if (u && u.profile && (u.profile.role === "super_admin" || u.profile.role === "admin")) {
+  document.getElementById("welcome-msg").textContent = "Connecté en tant que " + u.profile.display_name + " (" + u.profile.role + ")";
+  showDash();
+}
+
+// Login on Enter
+document.getElementById("g-pwd").addEventListener("keydown", e => { if (e.key === "Enter") doLogin(); });
+</script>
+</body>
+</html>
