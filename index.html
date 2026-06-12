@@ -256,7 +256,7 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
       <button class="btn-player" id="l-btnP" onclick="goForm('player')">⚽ JE SUIS JOUEUR</button>
       <button class="btn-staff" id="l-btnS" onclick="goForm('staff')">📋 JE SUIS STAFF</button>
     </div>
-    <div style="margin-top:22px;font-size:11.5px;color:rgba(255,255,255,0.22)" id="l-price">Gratuit pour créer &amp; prévisualiser • $5 pour exporter PDF + DNA Card</div>
+    <div style="margin-top:22px;font-size:11.5px;color:rgba(255,255,255,0.22)" id="l-price">Gratuit pour créer &amp; prévisualiser • $9.99 pour exporter PDF + DNA Card</div>
     <div style="margin-top:26px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.05);font-size:10.5px;color:rgba(255,255,255,0.3);text-align:center;letter-spacing:1px">
       © 2026 MyFootCV ·
       <a href="terms.html" style="color:rgba(212,175,55,0.7);text-decoration:none;margin:0 6px">CGU</a> ·
@@ -306,7 +306,7 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
     </div>
     <div style="display:flex;gap:7px;align-items:center">
       <button onclick="goEdit()" style="padding:5px 11px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;background:rgba(255,255,255,0.07);color:white;font-size:10.5px;font-weight:700;cursor:pointer;font-family:'Oswald',sans-serif;text-transform:uppercase" id="p-edit-btn">✏️ Modifier</button>
-      <button onclick="openPaywall()" style="padding:5px 13px;background:linear-gradient(135deg,#1A3B7A,#D4AF37);border:none;border-radius:6px;color:white;font-size:10.5px;font-weight:700;cursor:pointer;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px" id="p-export-btn">↓ Export PDF — $5</button>
+      <button onclick="openPaywall()" style="padding:5px 13px;background:linear-gradient(135deg,#1A3B7A,#D4AF37);border:none;border-radius:6px;color:white;font-size:10.5px;font-weight:700;cursor:pointer;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px" id="p-export-btn">↓ Export PDF — $9.99</button>
       <button onclick="goNew()" style="padding:5px 11px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.65);font-size:10.5px;font-weight:700;cursor:pointer;font-family:'Oswald',sans-serif;text-transform:uppercase" id="p-new-btn">+ Nouveau</button>
       <div class="lang-wrap"><button class="lang-btn" id="lb-prof" onclick="toggleDrop('ld-prof',this)"><span id="lf-prof">🇫🇷</span><span id="lc-prof">FR</span>▾</button><div class="lang-drop" id="ld-prof"></div></div>
     </div>
@@ -328,7 +328,7 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
     <div class="action-grid">
       <button class="action-btn prim" onclick="openPaywall()">
         <div class="action-lbl">📄 Exporter PDF</div>
-        <div class="action-sub">PDF + QR • $5</div>
+        <div class="action-sub">PDF + QR • $9.99</div>
       </button>
       <button class="action-btn sec" onclick="goEdit()">
         <div class="action-lbl">✏️ Modifier CV</div>
@@ -371,7 +371,7 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
       </div>
 
       <div style="font-size:10.5px;color:#1e40af;line-height:1.5;background:rgba(255,255,255,0.5);border-radius:6px;padding:7px 10px">
-        💡 <strong>Comment ça marche :</strong> Partagez votre code avec vos amis joueurs / staff. Quand ils créent leur CV et achètent (PDF $5 ou modification $1), <strong>vous touchez 15% automatiquement</strong>.
+        💡 <strong>Comment ça marche :</strong> Partagez votre code avec vos amis joueurs / staff. Quand ils créent leur CV et achètent (Pro $9.99 ou édition $2.99), <strong>vous touchez 15% automatiquement</strong>.
       </div>
     </div>
   </div>
@@ -488,9 +488,9 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
           <div class="fld" style="margin:0 0 8px 0">
             <label style="font-size:9px">Type de code (s'applique sur quel paywall ?)</label>
             <select class="sel" id="pc-type">
-              <option value="all">🌐 Tous les achats (Export $5 + Edit $1)</option>
-              <option value="export">📄 Export PDF seulement ($5)</option>
-              <option value="edit">✏️ Modification CV seulement ($1)</option>
+              <option value="all">🌐 Tous les achats (Pro $9.99 + Edit $2.99)</option>
+              <option value="export">📄 Export PDF seulement ($9.99)</option>
+              <option value="edit">✏️ Modification CV seulement ($2.99)</option>
             </select>
           </div>
           <button onclick="createPromoCode()" style="width:100%;padding:10px;background:linear-gradient(135deg,#1A3B7A,#2563EB);color:white;border:none;border-radius:8px;font-size:12px;font-weight:700;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px;cursor:pointer">➕ Créer le code promo</button>
@@ -543,8 +543,8 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
     <div style="font-size:42px;margin-bottom:8px;text-align:center">✏️</div>
     <div style="font-size:22px;font-family:'Oswald',sans-serif;font-weight:700;color:#0B1B3F;text-transform:uppercase;text-align:center;margin-bottom:4px">Modifier votre CV</div>
     <div style="text-align:center;margin-bottom:12px">
-      <span id="paywall-base-price-edit" style="display:none;text-decoration:line-through;color:#999;font-size:16px;font-family:'Oswald',sans-serif;margin-right:8px">$1.00</span>
-      <span id="paywall-final-price-edit" style="font-size:28px;font-family:'Oswald',sans-serif;font-weight:900;color:#1A3B7A">$1.00</span>
+      <span id="paywall-base-price-edit" style="display:none;text-decoration:line-through;color:#999;font-size:16px;font-family:'Oswald',sans-serif;margin-right:8px">$2.99</span>
+      <span id="paywall-final-price-edit" style="font-size:28px;font-family:'Oswald',sans-serif;font-weight:900;color:#1A3B7A">$2.99</span>
     </div>
 
     <!-- Champs verrouillés -->
@@ -589,8 +589,8 @@ input[type=range]{width:100%;accent-color:#1A3B7A;height:4px;cursor:pointer}
 
     <!-- Affichage du prix avec promo -->
     <div style="text-align:center;margin-bottom:6px">
-      <span id="paywall-base-price-export" style="display:none;text-decoration:line-through;color:#999;font-size:18px;font-family:'Oswald',sans-serif;margin-right:8px">$5.00</span>
-      <span id="paywall-final-price-export" style="font-size:36px;font-family:'Oswald',sans-serif;font-weight:900;color:#1A3B7A">$5.00</span>
+      <span id="paywall-base-price-export" style="display:none;text-decoration:line-through;color:#999;font-size:18px;font-family:'Oswald',sans-serif;margin-right:8px">$9.99</span>
+      <span id="paywall-final-price-export" style="font-size:36px;font-family:'Oswald',sans-serif;font-weight:900;color:#1A3B7A">$9.99</span>
     </div>
 
     <!-- Code promo input -->
@@ -898,7 +898,7 @@ const LANGS={
     sub:"Standard mondial utilisé par les joueurs et staff de 40+ pays.<br/>PDF club-ready • Card réseaux sociaux • QR highlights",
     badges:["✓ Joueurs","✓ Staff","✓ Hommes &amp; Femmes","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ JE SUIS JOUEUR",btnS:"📋 JE SUIS STAFF",
-    price:"Gratuit pour créer &amp; prévisualiser • $5 pour exporter PDF + DNA Card",
+    price:"Gratuit pour créer &amp; prévisualiser • $9.99 pour exporter PDF + DNA Card",
     home:"← Accueil",typeP:"⚽ Joueur",typeS:"📋 Staff",
     steps:["Identité","Profil","Attributs","Carrière"],
     back:"← Retour",next1:"Suivant : Profil →",next2:"Suivant : Attributs →",next3:"Suivant : Carrière →",
@@ -906,14 +906,14 @@ const LANGS={
     prevLbl:"Aperçu CV",prevTitle:"Remplissez le formulaire",
     prevSub:"Votre CV apparaîtra après avoir cliqué sur<br/><strong style=\"color:#059669\">✓ Enregistrer</strong>",
     saved:"✓ CV ENREGISTRÉ",okTitle:"CV enregistré avec succès !",okSub:"Exportez en PDF + DNA Card pour partager avec des clubs et agents",
-    expSm:"Exporter →",editBtn:"✏️ Modifier",expBtn:"↓ Export PDF — $5",newBtn:"+ Nouveau",
+    expSm:"Exporter →",editBtn:"✏️ Modifier",expBtn:"↓ Export PDF — $9.99",newBtn:"+ Nouveau",
     cvPdf:"📄 CV PDF Club",cvDna:"🎮 DNA Card"},
   en:{code:"en",flag:"🇬🇧",name:"English",
     h1:"YOUR FOOTBALL CV",h2:"PROFESSIONAL",h3:"IN 2 MINUTES",
     sub:"World standard used by players and staff from 40+ countries.<br/>Club-ready PDF • Social media card • QR highlights",
     badges:["✓ Players","✓ Staff","✓ Men &amp; Women","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ I'M A PLAYER",btnS:"📋 I'M STAFF",
-    price:"Free to create &amp; preview • $5 to export PDF + DNA Card",
+    price:"Free to create &amp; preview • $9.99 to export PDF + DNA Card",
     home:"← Home",typeP:"⚽ Player",typeS:"📋 Staff",
     steps:["Identity","Profile","Attributes","Career"],
     back:"← Back",next1:"Next: Profile →",next2:"Next: Attributes →",next3:"Next: Career →",
@@ -921,14 +921,14 @@ const LANGS={
     prevLbl:"CV Preview",prevTitle:"Fill in the form",
     prevSub:"Your CV will appear after clicking<br/><strong style=\"color:#059669\">✓ Save</strong>",
     saved:"✓ CV SAVED",okTitle:"CV saved successfully!",okSub:"Export as PDF + DNA Card to share with clubs and agents",
-    expSm:"Export →",editBtn:"✏️ Edit",expBtn:"↓ Export PDF — $5",newBtn:"+ New",
+    expSm:"Export →",editBtn:"✏️ Edit",expBtn:"↓ Export PDF — $9.99",newBtn:"+ New",
     cvPdf:"📄 Club PDF CV",cvDna:"🎮 DNA Card"},
   es:{code:"es",flag:"🇪🇸",name:"Español",
     h1:"TU CV DE FÚTBOL",h2:"PROFESIONAL",h3:"EN 2 MINUTOS",
     sub:"Estándar mundial usado por jugadores y staff de 40+ países.<br/>PDF listo para clubes • Card redes sociales • QR highlights",
     badges:["✓ Jugadores","✓ Staff","✓ Hombres &amp; Mujeres","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ SOY JUGADOR",btnS:"📋 SOY STAFF",
-    price:"Gratis para crear &amp; previsualizar • $5 para exportar PDF + DNA Card",
+    price:"Gratis para crear &amp; previsualizar • $9.99 para exportar PDF + DNA Card",
     home:"← Inicio",typeP:"⚽ Jugador",typeS:"📋 Staff",
     steps:["Identidad","Perfil","Atributos","Carrera"],
     back:"← Atrás",next1:"Siguiente: Perfil →",next2:"Siguiente: Atributos →",next3:"Siguiente: Carrera →",
@@ -936,14 +936,14 @@ const LANGS={
     prevLbl:"Vista previa CV",prevTitle:"Rellena el formulario",
     prevSub:"Tu CV aparecerá tras hacer clic en<br/><strong style=\"color:#059669\">✓ Guardar</strong>",
     saved:"✓ CV GUARDADO",okTitle:"¡CV guardado con éxito!",okSub:"Exporta en PDF + DNA Card para compartir con clubes y agentes",
-    expSm:"Exportar →",editBtn:"✏️ Editar",expBtn:"↓ Exportar PDF — $5",newBtn:"+ Nuevo",
+    expSm:"Exportar →",editBtn:"✏️ Editar",expBtn:"↓ Exportar PDF — $9.99",newBtn:"+ Nuevo",
     cvPdf:"📄 CV PDF Club",cvDna:"🎮 DNA Card"},
   pt:{code:"pt",flag:"🇵🇹",name:"Português",
     h1:"O TEU CV DE FUTEBOL",h2:"PROFISSIONAL",h3:"EM 2 MINUTOS",
     sub:"Padrão mundial usado por jogadores e staff de 40+ países.<br/>PDF pronto para clubes • Card redes sociais • QR highlights",
     badges:["✓ Jogadores","✓ Staff","✓ Homens &amp; Mulheres","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ SOU JOGADOR",btnS:"📋 SOU STAFF",
-    price:"Grátis para criar &amp; pré-visualizar • $5 para exportar PDF + DNA Card",
+    price:"Grátis para criar &amp; pré-visualizar • $9.99 para exportar PDF + DNA Card",
     home:"← Início",typeP:"⚽ Jogador",typeS:"📋 Staff",
     steps:["Identidade","Perfil","Atributos","Carreira"],
     back:"← Voltar",next1:"Seguinte: Perfil →",next2:"Seguinte: Atributos →",next3:"Seguinte: Carreira →",
@@ -951,14 +951,14 @@ const LANGS={
     prevLbl:"Pré-visualização CV",prevTitle:"Preencha o formulário",
     prevSub:"O seu CV aparecerá após clicar em<br/><strong style=\"color:#059669\">✓ Guardar</strong>",
     saved:"✓ CV GUARDADO",okTitle:"CV guardado com sucesso!",okSub:"Exporta em PDF + DNA Card para partilhar com clubes e agentes",
-    expSm:"Exportar →",editBtn:"✏️ Editar",expBtn:"↓ Exportar PDF — $5",newBtn:"+ Novo",
+    expSm:"Exportar →",editBtn:"✏️ Editar",expBtn:"↓ Exportar PDF — $9.99",newBtn:"+ Novo",
     cvPdf:"📄 CV PDF Clube",cvDna:"🎮 DNA Card"},
   ar:{code:"ar",flag:"🇸🇦",name:"العربية",
     h1:"سيرتك الذاتية الكروية",h2:"الاحترافية",h3:"في دقيقتين",
     sub:"المعيار العالمي للاعبين وطواقم من 40+ دولة.<br/>PDF جاهز للأندية • بطاقة شبكات اجتماعية • QR Highlights",
     badges:["✓ اللاعبون","✓ الطاقم","✓ رجال ونساء","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ أنا لاعب",btnS:"📋 أنا من الطاقم",
-    price:"مجاني للإنشاء والمعاينة • $5 لتصدير PDF + DNA Card",
+    price:"مجاني للإنشاء والمعاينة • $9.99 لتصدير PDF + DNA Card",
     home:"الرئيسية ←",typeP:"⚽ لاعب",typeS:"📋 طاقم",
     steps:["الهوية","الملف","الصفات","المسيرة"],
     back:"رجوع →",next1:"التالي: الملف ←",next2:"التالي: الصفات ←",next3:"التالي: المسيرة ←",
@@ -966,14 +966,14 @@ const LANGS={
     prevLbl:"معاينة السيرة",prevTitle:"أكمل النموذج",
     prevSub:"ستظهر سيرتك الذاتية بعد النقر على<br/><strong style=\"color:#059669\">✓ حفظ</strong>",
     saved:"✓ تم الحفظ",okTitle:"تم الحفظ بنجاح!",okSub:"صدّر PDF + DNA Card للمشاركة مع الأندية والوكلاء",
-    expSm:"تصدير ←",editBtn:"✏️ تعديل",expBtn:"↓ تصدير PDF — $5",newBtn:"+ جديد",
+    expSm:"تصدير ←",editBtn:"✏️ تعديل",expBtn:"↓ تصدير PDF — $9.99",newBtn:"+ جديد",
     cvPdf:"📄 PDF للأندية",cvDna:"🎮 بطاقة DNA"},
   it:{code:"it",flag:"🇮🇹",name:"Italiano",
     h1:"IL TUO CV CALCISTICO",h2:"PROFESSIONALE",h3:"IN 2 MINUTI",
     sub:"Standard mondiale utilizzato da giocatori e staff di 40+ paesi.<br/>PDF pronto per i club • Card social media • QR highlights",
     badges:["✓ Giocatori","✓ Staff","✓ Uomini &amp; Donne","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ SONO GIOCATORE",btnS:"📋 SONO STAFF",
-    price:"Gratis per creare &amp; visualizzare • $5 per esportare PDF + DNA Card",
+    price:"Gratis per creare &amp; visualizzare • $9.99 per esportare PDF + DNA Card",
     home:"← Home",typeP:"⚽ Giocatore",typeS:"📋 Staff",
     steps:["Identità","Profilo","Attributi","Carriera"],
     back:"← Indietro",next1:"Avanti: Profilo →",next2:"Avanti: Attributi →",next3:"Avanti: Carriera →",
@@ -981,14 +981,14 @@ const LANGS={
     prevLbl:"Anteprima CV",prevTitle:"Compila il modulo",
     prevSub:"Il tuo CV apparirà dopo aver cliccato su<br/><strong style=\"color:#059669\">✓ Salva</strong>",
     saved:"✓ CV SALVATO",okTitle:"CV salvato con successo!",okSub:"Esporta in PDF + DNA Card per condividere con club e agenti",
-    expSm:"Esporta →",editBtn:"✏️ Modifica",expBtn:"↓ Esporta PDF — $5",newBtn:"+ Nuovo",
+    expSm:"Esporta →",editBtn:"✏️ Modifica",expBtn:"↓ Esporta PDF — $9.99",newBtn:"+ Nuovo",
     cvPdf:"📄 CV PDF Club",cvDna:"🎮 DNA Card"},
   de:{code:"de",flag:"🇩🇪",name:"Deutsch",
     h1:"DEIN FUSSBALL-CV",h2:"PROFESSIONELL",h3:"IN 2 MINUTEN",
     sub:"Weltstandard für Spieler und Staff aus 40+ Ländern.<br/>Club-fertige PDF • Social Media Karte • QR Highlights",
     badges:["✓ Spieler","✓ Staff","✓ Männer &amp; Frauen","✓ PDF Export","✓ DNA Card"],
     btnP:"⚽ ICH BIN SPIELER",btnS:"📋 ICH BIN STAFF",
-    price:"Kostenlos erstellen &amp; vorschauen • $5 für PDF + DNA Card Export",
+    price:"Kostenlos erstellen &amp; vorschauen • $9.99 für PDF + DNA Card Export",
     home:"← Startseite",typeP:"⚽ Spieler",typeS:"📋 Staff",
     steps:["Identität","Profil","Attribute","Karriere"],
     back:"← Zurück",next1:"Weiter: Profil →",next2:"Weiter: Attribute →",next3:"Weiter: Karriere →",
@@ -996,7 +996,7 @@ const LANGS={
     prevLbl:"CV Vorschau",prevTitle:"Formular ausfüllen",
     prevSub:"Dein CV erscheint nach Klick auf<br/><strong style=\"color:#059669\">✓ Speichern</strong>",
     saved:"✓ CV GESPEICHERT",okTitle:"CV erfolgreich gespeichert!",okSub:"Als PDF + DNA Card exportieren um mit Clubs und Agenten zu teilen",
-    expSm:"Export →",editBtn:"✏️ Bearbeiten",expBtn:"↓ PDF Export — $5",newBtn:"+ Neu",
+    expSm:"Export →",editBtn:"✏️ Bearbeiten",expBtn:"↓ PDF Export — $9.99",newBtn:"+ Neu",
     cvPdf:"📄 Club PDF CV",cvDna:"🎮 DNA Karte"}
 };
 
@@ -1284,8 +1284,12 @@ function clearPromo(paywallType){
   const msg=document.getElementById("promo-msg-"+paywallType);if(msg)msg.innerHTML="";
   updatePaywallPrice(paywallType);
 }
+// Prix MyFootCV (mis à jour selon analyse Stripe + marché)
+// Mis à jour 12/06/2026 - voir pricing.js pour la détection géographique complète
+const MFC_PRICE_EXPORT = 9.99;  // Pro Lifetime / Export PDF + DNA Card (était $5)
+const MFC_PRICE_EDIT   = 2.99;  // Édition unique (était $1, non-viable avec Stripe fees)
 function updatePaywallPrice(paywallType){
-  const base=paywallType==="export"?5:1;
+  const base=paywallType==="export"?MFC_PRICE_EXPORT:MFC_PRICE_EDIT;
   const finalPrice=appliedPromo?(base*(1-appliedPromo.discount/100)).toFixed(2):base.toFixed(2);
   const el=document.getElementById("paywall-final-price-"+paywallType);
   const cmpEl=document.getElementById("paywall-base-price-"+paywallType);
@@ -1293,7 +1297,7 @@ function updatePaywallPrice(paywallType){
   if(cmpEl){cmpEl.style.display=appliedPromo?"inline":"none";cmpEl.textContent="$"+base.toFixed(2);}
 }
 function confirmPaywallPayment(paywallType){
-  const basePrice=paywallType==="export"?5:1;
+  const basePrice=paywallType==="export"?MFC_PRICE_EXPORT:MFC_PRICE_EDIT;
   const finalPrice=appliedPromo?(basePrice*(1-appliedPromo.discount/100)):basePrice;
   const myDev=deviceFingerprint();
   const myEmail=(savedCV&&savedCV.email)||"anon";
@@ -2143,7 +2147,7 @@ function renderS1(){
   ${isEditMode?`<div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:1.5px solid #f59e0b;border-radius:10px;padding:11px 14px;margin-bottom:14px;display:flex;align-items:center;gap:11px">
     <span style="font-size:24px">🔒</span>
     <div style="flex:1">
-      <div style="font-size:11.5px;font-weight:700;color:#92400e;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px">Mode édition payant activé — $1</div>
+      <div style="font-size:11.5px;font-weight:700;color:#92400e;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.5px">Mode édition payant activé — $2.99</div>
       <div style="font-size:10.5px;color:#92400e;margin-top:2px;line-height:1.4"><strong>Nom · Date de naissance · Nationalité</strong> verrouillés (anti-fraude). Tout le reste est modifiable.</div>
     </div>
   </div>`:""}
